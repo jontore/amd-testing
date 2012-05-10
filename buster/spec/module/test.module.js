@@ -53,6 +53,17 @@ describe('module with own dependency', function(run) {
   });
 });
 
+describe('module depending on a submodule using relative path', function(run) {
+  require(['level1/level1_module'], function(level1Module) {
+    run(function() {
+      it('should work', function() {
+        expect(level1Module.name).toEqual("Module level one");
+        expect(level1Module.dependencies[0].name).toEqual("Module two level two");
+      });
+    });
+  });
+});
+
 /* !! TEST BEING OCASSIONALLY SKIPPED FOR SOME REASON !! */
 describe('requirejs plugins', function(run) {
   require.config({
